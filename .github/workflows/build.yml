@@ -95,10 +95,8 @@ jobs:
           if [ -x "$gen_sec" ] && [ -x "$gen_ffs" ]; then
             if "$gen_sec" -s EFI_SECTION_PE32 -o ../artifacts/v3x4.pe32 ../artifacts/v3x4.efi && \
                "$gen_ffs" -t EFI_FV_FILETYPE_DRIVER -g 20E8A16C-8C70-4702-8698-27AFF7281EB9 -o ../artifacts/v3x4.ffs -i ../artifacts/v3x4.pe32; then
-              rm -f ../artifacts/v3x4.pe32
             else
               echo "::warning::Optional GenFfs step failed; EFI artifact is still available"
-              rm -f ../artifacts/v3x4.pe32 ../artifacts/v3x4.ffs
             fi
           else
             echo "::warning::GenSec/GenFfs wrappers not found; skipping optional FFS artifact"
